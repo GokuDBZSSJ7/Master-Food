@@ -1,0 +1,277 @@
+<app-header></app-header>
+ <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <h1>Descubra Sabores Incríveis</h1>
+                <p>Explore nossa coleção de receitas deliciosas e fáceis de fazer</p>
+                <!-- <div class="search-container">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Busque por uma receita..." />
+                        <button class="search-btn">Buscar</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Delicious food" />
+            </div>
+        </section>
+
+        <!-- Featured Recipe -->
+        <section class="featured-section">
+            <div class="container">
+                <h2 class="section-title">Receita em Destaque</h2>
+                <div class="featured-recipe">
+                    <div class="recipe-image">
+                        <img [src]="random?.strMealThumb" alt="Spaghetti Carbonara"/>
+                        <div class="recipe-badge">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3>{{random?.strMeal}}</h3>
+                        <div class="recipe-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>25 min</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users"></i>
+                                <span>4 porções</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Fácil</span>
+                            </div>
+                        </div>
+                        <button class="recipe-btn" [routerLink]="['/recipe', random?.idMeal]">
+                            <span>Ver Receita</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-section" id="categories">
+            <div class="container">
+                <h2 class="section-title">Categorias</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img [src]="categorias[0]?.strCategoryThumb" alt="Beef"/>
+                        </div>
+                        <div class="category-content">
+                            <h3>{{categorias[0]?.strCategory}}</h3>
+                            <p>45 receitas</p>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img [src]="categorias[1]?.strCategoryThumb" alt="Chicken"/>
+                        </div>
+                        <div class="category-content">
+                            <h3>{{categorias[1]?.strCategory}}</h3>
+                            <p>38 receitas</p>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img [src]="categorias[2]?.strCategoryThumb" alt="Dessert"/>
+                        </div>
+                        <div class="category-content">
+                            <h3>{{categorias[2]?.strCategory}}</h3>
+                            <p>52 receitas</p>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img [src]="categorias[11]?.strCategoryThumb" alt="Vegetarian"/>
+                        </div>
+                        <div class="category-content">
+                            <h3>{{categorias[11]?.strCategory}}</h3>
+                            <p>29 receitas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regional Filters -->
+        <section class="regions-section">
+            <div class="container">
+                <h2 class="section-title">Cozinhas do Mundo</h2>
+                <div class="regions-grid">
+                    <button class="region-btn">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Mexicana</span>
+                    </button>
+                    <button class="region-btn">
+                        <i class="fas fa-pizza-slice"></i>
+                        <span>Italiana</span>
+                    </button>
+                    <button class="region-btn">
+                        <i class="fas fa-fish"></i>
+                        <span>Japonesa</span>
+                    </button>
+                    <button class="region-btn">
+                        <i class="fas fa-bread-slice"></i>
+                        <span>Francesa</span>
+                    </button>
+                    <button class="region-btn">
+                        <i class="fas fa-pepper-hot"></i>
+                        <span>Brasileira</span>
+                    </button>
+                    <button class="region-btn">
+                        <i class="fas fa-cookie"></i>
+                        <span>Americana</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Recipes -->
+        <section class="popular-section" id="recipes">
+            <div class="container">
+                <h2 class="section-title">Receitas Populares</h2>
+                <div class="recipes-grid">
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img [src]="meals[0]?.strMealThumb" alt="Pizza Margherita"/>
+                            <div class="recipe-overlay">
+                                <button class="favorite-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="recipe-info">
+                            <h3>{{meals[0]?.strMeal}}</h3>
+                            <div class="recipe-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.9)</span>
+                            </div>
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Médio</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img [src]="meals[1]?.strMealThumb" alt="Tacos"/>
+                            <div class="recipe-overlay">
+                                <button class="favorite-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="recipe-info">
+                            <h3>{{meals[1]?.strMeal}}</h3>
+                            <div class="recipe-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>(4.6)</span>
+                            </div>
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 20 min</span>
+                                <span><i class="fas fa-signal"></i> Fácil</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img [src]="meals[2]?.strMealThumb" alt="Pancakes"/>
+                            <div class="recipe-overlay">
+                                <button class="favorite-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="recipe-info">
+                            <h3>{{meals[2]?.strMeal}}</h3>
+                            <div class="recipe-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.8)</span>
+                            </div>
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-clock"></i> 15 min</span>
+                                <span><i class="fas fa-signal"></i> Fácil</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-utensils"></i>
+                        <span>DeliciousRecipes</span>
+                    </div>
+                    <p>Descubra, cozinhe e compartilhe as melhores receitas do mundo.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Receitas</h4>
+                    <ul>
+                        <li><a href="#">Pratos Principais</a></li>
+                        <li><a href="#">Sobremesas</a></li>
+                        <li><a href="#">Aperitivos</a></li>
+                        <li><a href="#">Bebidas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#">Vegetariano</a></li>
+                        <li><a href="#">Vegano</a></li>
+                        <li><a href="#">Sem Glúten</a></li>
+                        <li><a href="#">Low Carb</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DeliciousRecipes. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>

@@ -1,0 +1,176 @@
+<div class="meal-detail-container">
+
+  <section class="meal-hero" id="topo">
+    <div class="meal-image-container">
+      @if (meal?.strMealThumb) {
+        <img 
+          [src]="meal.strMealThumb" 
+          [alt]="meal.strMeal"
+          class="meal-hero-image"
+          loading="lazy" />
+      }
+    </div>
+
+    <div class="meal-info">
+      <div class="container">
+        <h1 class="meal-title">{{ meal?.strMeal }}</h1>
+
+        @if (meal?.strMealAlternate) {
+          <h2 class="meal-subtitle">{{ meal.strMealAlternate }}</h2>
+        }
+
+        <div class="meal-meta">
+          @if (meal?.strCategory) {
+            <div class="meta-item">
+              <i class="fas fa-list"></i>
+              <div>
+                <span class="meta-label">Categoria: </span>
+                <span class="meta-value">{{ meal.strCategory }}</span>
+              </div>
+            </div>
+          }
+
+          @if (meal?.strArea) {
+            <div class="meta-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <span class="meta-label">Origem: </span>
+                <span class="meta-value">{{ meal.strArea }}</span>
+              </div>
+            </div>
+          }
+
+          @if (getIngredientsCount() > 0) {
+            <div class="meta-item">
+              <i class="fas fa-shopping-basket"></i>
+              <div>
+                <span class="meta-label">Ingredientes: </span>
+                <span class="meta-value">{{ getIngredientsCount() }} itens</span>
+              </div>
+            </div>
+          }
+
+          @if (meal?.strYoutube) {
+            <div class="meta-item">
+              <i class="fab fa-youtube"></i>
+              <div>
+                <span class="meta-label">Vídeo: </span>
+                <a [href]="meal.strYoutube" target="_blank" class="meta-link">Assistir no YouTube</a>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="meal-content">
+    <div class="container">
+      <div class="content-grid">
+
+        <!-- INGREDIENTES -->
+        <section class="ingredients-section" id="ingredientes">
+          <div class="section-header">
+            <h2><i class="fas fa-list-ul"></i> Ingredientes</h2>
+            <span class="ingredients-count">{{ getIngredientsCount() }} itens</span>
+          </div>
+
+          <div class="ingredients-list">
+            @for (ingredient of getIngredientsList(); track ingredient.index) {
+              <div class="ingredient-item">
+                <input 
+                  type="checkbox" 
+                  [id]="'ingredient-' + ingredient.index"
+                  class="ingredient-checkbox"
+                  [(ngModel)]="ingredient.checked" />
+
+                <label 
+                  [for]="'ingredient-' + ingredient.index" 
+                  class="ingredient-label">
+                  <span class="ingredient-measure">{{ ingredient.measure }}</span>
+                  <span class="ingredient-name">{{ ingredient.name }}</span>
+                </label>
+              </div>
+            }
+          </div>
+
+          <div class="shopping-actions">
+            <button class="shopping-btn" (click)="addToShoppingList()">
+              <i class="fas fa-shopping-cart"></i> Adicionar à Lista de Compras
+            </button>
+          </div>
+        </section>
+
+        <!-- INSTRUÇÕES -->
+        <section class="instructions-section" id="preparo">
+          <div class="section-header">
+            <h2><i class="fas fa-clipboard-list"></i> Modo de Preparo</h2>
+
+            @if (showTimer) {
+              <div class="timer-controls">
+                <div class="timer-display">
+                  <i class="fas fa-stopwatch"></i>
+                  <span class="timer-time">{{ formatTime(timerSeconds) }}</span>
+                  <button 
+                    class="timer-btn" 
+                    [class.active]="timerRunning"
+                    (click)="toggleTimer()">
+                    {{ timerRunning ? 'Pausar' : 'Iniciar' }}
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="instructions-content">
+            <div class="instructions-text" [innerHTML]="getFormattedInstructions()"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- INFO ADICIONAL -->
+      <section class="additional-info">
+        @if (meal?.strSource) {
+          <div class="source-info">
+            <h3><i class="fas fa-external-link-alt"></i> Fonte Original</h3>
+            <a [href]="meal.strSource" target="_blank" class="source-link">Ver receita original</a>
+          </div>
+        }
+
+        <div class="recipe-actions">
+          <button class="action-btn print-btn" (click)="printRecipe()">
+            <i class="fas fa-print"></i> Imprimir
+          </button>
+          <button class="action-btn save-btn" (click)="saveRecipe()">
+            <i class="fas fa-bookmark"></i> Salvar
+          </button>
+          <button class="action-btn share-btn" (click)="shareRecipe()">
+            <i class="fas fa-share"></i> Compartilhar
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  @if (loading) {
+    <div class="loading-container">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Carregando receita...</span>
+      </div>
+    </div>
+  }
+
+  @if (error) {
+    <div class="error-container">
+      <div class="error-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Erro ao carregar receita</h3>
+        <p>{{ error }}</p>
+        <!-- <button class="retry-btn" (click)="retryLoad()">
+          <i class="fas fa-redo"></i> Tentar novamente
+        </button> -->
+      </div>
+    </div>
+  }
+</div>
