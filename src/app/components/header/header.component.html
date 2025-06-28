@@ -1,18 +1,26 @@
 <header class="header">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <i class="fas fa-utensils"></i>
-                <span>DeliciousRecipes</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" (click)="scrollTo('inicio')">Início</a></li>
-                <li><a href="#recipes" (click)="scrollTo('recipes')">Receitas</a></li>
-                <li><a href="#categories" (click)="scrollTo('categories')">Categorias</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-utensils"></i>
+            <span>DeliciousRecipes</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home" (click)="scrollTo('inicio')">Início</a></li>
+            <li><a href="#recipes" (click)="scrollTo('recipes')">Receitas</a></li>
+            <li><a href="#categories" (click)="scrollTo('categories')">Categorias</a></li>
+        </ul>
+        @if(isMobile) {
+        <div class="nav-toggle" (click)="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-menu" [class.open]="menuOpen" [class.mobile]="isMobile" [class.desktop]="!isMobile">
+            <li><a (click)="scrollTo('inicio'); closeMenu()">Início</a></li>
+            <li><a (click)="scrollTo('recipes'); closeMenu()">Receitas</a></li>
+            <li><a (click)="scrollTo('categories'); closeMenu()">Categorias</a></li>
+        </ul>
+        }
+    </nav>
+</header>

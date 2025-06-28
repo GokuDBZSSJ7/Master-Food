@@ -34,6 +34,22 @@
     display: flex;
     list-style: none;
     gap: 2rem;
+
+    &.mobile {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &.open {
+      display: flex;
+    }
+}
 }
 
 .nav-menu a {
